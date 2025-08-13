@@ -21,4 +21,3 @@ create table pet (
 describe pet;
 desc pet;
 
-select *
