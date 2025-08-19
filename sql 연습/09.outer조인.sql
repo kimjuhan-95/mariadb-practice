@@ -2,17 +2,17 @@
 -- outer join
 --
 
--- insert into dept values (null, '총무');
--- insert into dept values (null, '개발');
--- insert into dept values (null, '영업');
--- insert into dept values (null, '마케팅');
+insert into dept values (null, '총무');
+insert into dept values (null, '개발');
+insert into dept values (null, '영업');
+insert into dept values (null, '마케팅');
 
 select * from dept;
 
--- insert into emp values(null, '둘리', 1);
--- insert into emp values(null, '마이콜', 2);
--- insert into emp values(null, '또치', 3);
--- insert into emp values(null, '길동이', null);
+insert into emp values(null, '둘리', 1);
+insert into emp values(null, '마이콜', 2);
+insert into emp values(null, '또치', 3);
+insert into emp values(null, '길동이', null);
 
 select * from emp;
 
