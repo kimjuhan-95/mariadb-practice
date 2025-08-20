@@ -1,5 +1,6 @@
 package email;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class EmailApp {
@@ -13,7 +14,7 @@ public class EmailApp {
 			String command = scanner.nextLine();
 			
 			if("l".equals(command)) {
-				doList();
+				dolist();
 			} else if("d".equals(command)) {
 				doDelete();
 			} else if("i".equals(command)) {
@@ -28,12 +29,25 @@ public class EmailApp {
 		}
 	}
 
-	private static void doList() {
-		System.out.println("do list");
+	private static void dolist() {
+		List<EmailVo> list = new EmailDao().findAll();
+		for(EmailVo vo : list) {
+			System.out.println(vo.getFirstName() + " " + vo.getLastName() + " : " + vo.getEmail());
+		}
 	}
 
 	private static void doDelete() {
-		System.out.println("do delete");
+		System.out.println("이메일:");
+		String email = scanner.nextLine();
+		
+		new EmailDao().deleteByEmail(email);
+		dolist();
+	}
+
+	 {
+		
+		
+		
 	}
 
 	private static void doInsert() {
@@ -53,7 +67,7 @@ public class EmailApp {
 		
 		new EmailDao().insert(vo);
 		
-		doList();
+		dolist();
 	}
 	
 }
