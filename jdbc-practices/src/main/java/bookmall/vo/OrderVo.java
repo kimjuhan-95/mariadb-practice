@@ -7,7 +7,15 @@ public class OrderVo {
 	private String Status;
 	private int Payment;
 	private String Shipping;
+	private Long getNO;
 	
+	
+	public Long getGetNO() {
+		return getNO;
+	}
+	public void setGetNO(Long getNO) {
+		this.getNO = getNO;
+	}
 	public Long getNumber() {
 		return number;
 	}
@@ -45,6 +53,7 @@ public class OrderVo {
 		Shipping = shipping;
 	}
 	
+	
 	@Override
     public String toString() {
         return "OrderVo [number=" + number + ", userName=" + userName 
@@ -54,4 +63,5 @@ public class OrderVo {
 	
 
 	}
+	
 	}
