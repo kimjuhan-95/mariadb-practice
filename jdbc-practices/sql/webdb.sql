@@ -1,97 +1,90 @@
---
--- JDBC Test SQL
---
+desc email_log;
+desc board;
 
-desc dept;
+select no, title, writer from board;
 
--- select 
-select id, name from dept where name like '%개발%';
+ALTER TABLE board ADD COLUMN user_id BIGINT;
+
+drop table email_log;
+
+select * from email;
+select * from email_log;
+
+delete from email_log;
+delete from email;
+
+insert into email_log values(current_date(), 1);
+
+update email_log set count = count + 1 where reg_date = current_date();
+
+-- select
+select * from email_log;
+
 
 -- insert
-insert into dept(name) values('UX팀');
-
--- delete
-delete from dept where id = 7;
+insert into email_log values (current_date(), 1);
 
 -- update
-update dept set name = '서비스개발팀' where id = 2;
+UPDATE email_log SET count = count + 1 WHERE reg_date = curdate();
 
---
--- email application
--- 
+update email_log set count = count - 1 where reg_date = '';
 
-desc email;
-
--- count
-select count(*) from email;
-
--- findAll
-select id, first_name, last_name, email from email order by id desc;
-
--- deleteByEmail
-delete from email where email = 'dooly@gamil.com';
-
--- insert
-insert into email(first_name, last_name, email) values ('둘','리', 'dooly@gmail.com');
-
---
--- mysite: user
---
-
-desc user;
-
-
--- insert: author
-insert into author(name) 
-select last_insert_id();
-
-
---
--- guestbook
---
-
-desc guestbook;
-
--- insert
-insert into guestbook values(null, '둘리', '1234', 'ㅎㅇ', now());
-
--- findAll
-select id, name, date_format(reg_date, '%Y-%m-%d %H:%i') as reg_date 
-from guestbook;
-
--- deleteByIdAndPassword
-delete from guestbook where id = 1 and password = '1234';
-
---
--- mysite: user
---
-
-desc user;
-
-
--- 회원가입
-insert into author (name, email, password, gender, join_date) values ('둘리', 'dooly@g.com', password('1234'), 'male', now());
-
--- 회원리스트
 select * from user;
 
--- 삭제
-delete from user where id = 3;
+alter table user add column role enum('USER','ADMIN') default 'USER' not null;
+desc user;
 
--- 로그인
-select id, name from user where email = 'kickscar@gmail.com' and password = password('1234');
+insert into user values(10, '관리자','admin@mysite.com', password('1234'), 'male',now(), 'ADMIN');
 
--- update
-update user 
-set name='홍길동', password = password('1234'), gender = 'male' 
-where id = 10;
+insert into site values(
+1,
+'MySite',
+'안녕하세요. 김주한의 mysite에 오신 것을 환영합니다.',
+'/upload-images/default.png',
+'이 사이트는  웹 프로그램밍 실습과제 예제 사이트입니다.메뉴는  사이트 소개, 방명록, 게시판이 있구요. Java 수업 + 데이터베이스 수업 + 웹프로그래밍 수업 배운 거 있는거 없는 거 다 합쳐서 만들어 놓은 사이트 입니다.'
+);
+
+ALTER TABLE user ADD COLUMN role enum('USER','ADMIN') NOT NULL DEFAULT 'USER';
+
+DESC board;
+
+SELECT * FROM user;
+
+ALTER TABLE user MODIFY id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+DESC user;
+
+ALTER TABLE user CHANGE id id BIGINT NOT NULL AUTO_INCREMENT;
 
 
 
+INSERT INTO user(name, email, password, role, gender, join_date)
+VALUES ('김주한', 'test@test.com', PASSWORD('1234'), 'USER', 'male', NOW());
 
+ALTER TABLE user MODIFY join_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE guestbook 
+MODIFY COLUMN id BIGINT NOT NULL AUTO_INCREMENT;
 
+DESCRIBE board;
 
+ALTER TABLE board MODIFY COLUMN id INT(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE board DROP COLUMN user_id1;
+
+SELECT * FROM user WHERE email='가입한 이메일';
+
+show tables;
+select * from user;
+
+select * from board;
+select * from guestbook;
+
+select * from user where email = '가입한 이메일';
+
+SHOW GRANTS FOR 'webdb'@'localhost';
+
+INSERT INTO user(name, email, password, gender, join_date, role)
+VALUES ('홍길동', 'hong@test.com', PASSWORD('1234'), 'male', NOW(), 'USER');
 
 
